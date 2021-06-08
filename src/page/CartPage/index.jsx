@@ -62,6 +62,8 @@ const CartPage = () => {
       return { produto: { id: item.id }, quantidade: 2 };
     });
 
+    const codigoVenda = uuidv4();
+
     api
       .post("/vendas", {
         cliente: name,
@@ -75,12 +77,13 @@ const CartPage = () => {
         formaPagamento: {
           id: activePayment,
         },
-        codigoVenda: uuidv4(),
+        codigoVenda,
         itemVenda,
       })
       .then((response) => {
         if (response.status === 201) {
           alert("Compra efetuada com sucesso!");
+          alert(`Seu código da venda é: ${codigoVenda}`);
           setCity("");
           setComplement("");
           setLastName("");
