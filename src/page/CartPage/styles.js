@@ -11,6 +11,10 @@ export const Container = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+
+    @media (max-width: 1160px) {
+      grid-template-columns: 1fr;
+    }
   }
 `;
 
@@ -25,6 +29,7 @@ export const AddressSide = styled.div`
 
     > div {
       display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
       width: 100%;
 

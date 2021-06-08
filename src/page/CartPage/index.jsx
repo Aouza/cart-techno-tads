@@ -27,6 +27,11 @@ const CartPage = () => {
   const [totalValue, setTotalValue] = useState(0);
   const [paymentType, setPaymentType] = useState([{}]);
 
+  const formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   useEffect(() => {
     api.get("/produtos").then((response) => setCartItems(response.data));
     api
@@ -202,7 +207,7 @@ const CartPage = () => {
                       <img src={product.foto} alt={product.nome} />
                       <div>
                         <h2>{product.nome}</h2>
-                        <strong>{product.preco}</strong>
+                        <strong>{formatter.format(product.preco)}</strong>
                       </div>
                       <aside>
                         <button onClick={() => handleDeleteProduct(product.id)}>
@@ -221,14 +226,14 @@ const CartPage = () => {
           </main>
           <div>
             <span>
-              Subtotal: <strong>{totalValue}</strong>
+              Subtotal: <strong>{formatter.format(totalValue)}</strong>
             </span>
             <span>
               Frete: <strong>40</strong>
             </span>
           </div>
           <footer>
-            <strong>{totalValue + 40}</strong>
+            <strong>{formatter.format(totalValue + 40)}</strong>
             <button onClick={sendSale}>Finalizar</button>
           </footer>
         </CartSide>
